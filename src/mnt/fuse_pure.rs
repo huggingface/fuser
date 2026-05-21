@@ -114,12 +114,12 @@ fn fuse_mount_pure(
     // Other supported Unix targets (such as the BSDs) rely on the setuid
     // mount helper, which mirrors libfuse's approach.
     if cfg!(target_os = "linux") || cfg!(target_os = "macos") {
-        let res = fuse_mount_sys(mountpoint, options, acl)?;
-        match res {
-            Some(file) => return Ok((file, None)),
-            None => {
-                // Retry
-            }
+        match fuse_mount_sys(mountpoint, options, acl) {
+            Ok(Some(file)) => return Ok((file, None)),
+            Ok(None) => {} // mount(2) EPERM, retry via fusermount
+            // /dev/fuse inaccessible (e.g. unprivileged container), retry
+            Err(e) if matches!(e.kind(), ErrorKind::NotFound | ErrorKind::PermissionDenied) => {}
+            Err(e) => return Err(e),
         }
     }
 
