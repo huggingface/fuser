@@ -6,8 +6,12 @@ on:
     branches:
       - master
 
+permissions: {}
+
 jobs:
   compile:
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
@@ -20,11 +24,11 @@ jobs:
       RUSTDOCFLAGS: --deny warnings
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Cache
         id: rust-cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             ~/.cargo/bin/
@@ -56,17 +60,19 @@ jobs:
           make test_passthrough
 
   ci:
+    permissions:
+      contents: read
     runs-on: ubuntu-22.04
     timeout-minutes: 10
     env:
       RUSTFLAGS: --deny warnings
       RUSTDOCFLAGS: --deny warnings
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Cache
         id: rust-cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             ~/.cargo/bin/
@@ -97,17 +103,19 @@ jobs:
         run: INTERACTIVE="" make pre
 
   mac-ci:
+    permissions:
+      contents: read
     runs-on: macos-26
     env:
       RUSTFLAGS: --deny warnings
       RUSTDOCFLAGS: --deny warnings
       PKG_CONFIG_PATH: /usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Cache
         id: rust-cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             ~/.cargo/bin/
@@ -147,6 +155,8 @@ jobs:
         run: INTERACTIVE="" make pre
 
   test:
+    permissions:
+      contents: read
     runs-on: ubuntu-22.04
     timeout-minutes: 120
     strategy:
@@ -156,7 +166,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/maximize-build-disk-space-only-remove-unwanted-software
       - name: Maximize build space
-        uses: AdityaGarg8/remove-unwanted-software@v5
+        uses: AdityaGarg8/remove-unwanted-software@90e01b21170618765a73370fcc3abbd1684a7793 # v5
         with:
           remove-android: 'true'
           remove-dotnet: 'true'
@@ -167,7 +177,7 @@ jobs:
           remove-cached-tools: 'true'
           # verbose: 'true'
 
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Run tests
         run: INTERACTIVE="" make ${{ matrix.test_group }}
