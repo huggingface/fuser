@@ -20,11 +20,11 @@ jobs:
       RUSTDOCFLAGS: --deny warnings
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Cache
         id: rust-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/bin/
@@ -62,11 +62,11 @@ jobs:
       RUSTFLAGS: --deny warnings
       RUSTDOCFLAGS: --deny warnings
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Cache
         id: rust-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/bin/
@@ -103,11 +103,11 @@ jobs:
       RUSTDOCFLAGS: --deny warnings
       PKG_CONFIG_PATH: /usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Cache
         id: rust-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/bin/
@@ -167,7 +167,7 @@ jobs:
           remove-cached-tools: 'true'
           # verbose: 'true'
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Run tests
         run: INTERACTIVE="" make ${{ matrix.test_group }}
