@@ -24,11 +24,11 @@ jobs:
       RUSTDOCFLAGS: --deny warnings
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Cache
         id: rust-cache
-        uses: actions/cache@v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             ~/.cargo/bin/
@@ -68,11 +68,11 @@ jobs:
       RUSTFLAGS: --deny warnings
       RUSTDOCFLAGS: --deny warnings
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Cache
         id: rust-cache
-        uses: actions/cache@v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             ~/.cargo/bin/
@@ -111,11 +111,11 @@ jobs:
       RUSTDOCFLAGS: --deny warnings
       PKG_CONFIG_PATH: /usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Cache
         id: rust-cache
-        uses: actions/cache@v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: |
             ~/.cargo/bin/
@@ -166,7 +166,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/maximize-build-disk-space-only-remove-unwanted-software
       - name: Maximize build space
-        uses: AdityaGarg8/remove-unwanted-software@v5
+        uses: AdityaGarg8/remove-unwanted-software@90e01b21170618765a73370fcc3abbd1684a7793 # v5
         with:
           remove-android: 'true'
           remove-dotnet: 'true'
@@ -177,7 +177,7 @@ jobs:
           remove-cached-tools: 'true'
           # verbose: 'true'
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Run tests
         run: INTERACTIVE="" make ${{ matrix.test_group }}
