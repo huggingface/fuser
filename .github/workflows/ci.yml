@@ -6,8 +6,12 @@ on:
     branches:
       - master
 
+permissions: {}
+
 jobs:
   compile:
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     strategy:
@@ -56,6 +60,8 @@ jobs:
           make test_passthrough
 
   ci:
+    permissions:
+      contents: read
     runs-on: ubuntu-22.04
     timeout-minutes: 10
     env:
@@ -97,6 +103,8 @@ jobs:
         run: INTERACTIVE="" make pre
 
   mac-ci:
+    permissions:
+      contents: read
     runs-on: macos-26
     env:
       RUSTFLAGS: --deny warnings
@@ -147,6 +155,8 @@ jobs:
         run: INTERACTIVE="" make pre
 
   test:
+    permissions:
+      contents: read
     runs-on: ubuntu-22.04
     timeout-minutes: 120
     strategy:
