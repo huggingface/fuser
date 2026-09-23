@@ -5,11 +5,13 @@ on:
     branches:
       - master
 
-permissions:
-  contents: read
+
+permissions: {}
 
 jobs:
   macfuse:
+    permissions:
+      contents: read
     runs-on: macstadium
     env:
       PKG_CONFIG_PATH: /usr/local/lib/pkgconfig:/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH
